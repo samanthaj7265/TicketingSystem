@@ -8,6 +8,12 @@ public class Ticket
   public string  assigned { get; set; }
   public List<string> watching { get; set; }
 
+    public Ticket()
+  {
+    watching = new List<string>();
+  }
+
+
 
   public string Display()
     {

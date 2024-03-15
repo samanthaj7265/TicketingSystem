@@ -1,5 +1,7 @@
 ﻿ using Validater;
  using NLog;
+using System.Collections.Immutable;
+using Microsoft.Win32.SafeHandles;
 
 // See https://aka.ms/new-console-template for more information
 string path = Directory.GetCurrentDirectory() + "\\nlog.config";
@@ -10,35 +12,7 @@ logger.Info("Program started");
 
 string ticketFilePath = Directory.GetCurrentDirectory() + "\\Tickets.csv";
 
- /*Complete and submit first phase of project
- Build data file with initial system tickets and data in a CSV
- Write Console application to process and add records to the CSV file
- Tickets.csv*/
-
- Ticket ticket = new Ticket
-{
-  ticketId = 2,
-  summary = "system error ticket",
-  status = "open",
-  priority = "high",
-  submitter = "Samantha Jesmok",
-  assigned = "Drew Kjell",
-  watching = new List<string> { "Samantha Jesmok", "Drew Kjell"}
-};
-
 TicketFile ticketFile = new TicketFile(ticketFilePath);
-
- if (File.Exists(ticketFilePath))
- {
-     File.Delete(ticketFilePath);
- }
-
- using (StreamWriter sw = File.CreateText(ticketFilePath))
- {
-     sw.WriteLine("TicketID, Summary, Status, Priority, Submitter, Assigned, Watching");
-     sw.WriteLine("1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones");
-     sw.WriteLine($"{ticket.Display()}");
- }
 
 string choice = "";
 do
@@ -50,14 +24,56 @@ do
   // input selection
   choice = Console.ReadLine();
   logger.Info("User choice: {Choice}", choice);
-} while (choice == "1" || choice == "2");
+     if (choice == "1")
+     {
+        Ticket ticket = new Ticket();
 
-     {
-         Console.Write("Add Ticket:\n");
-         string appendText = Console.ReadLine();
-         File.AppendAllText(ticketFilePath, appendText); 
-     }
-     {
+        Console.WriteLine("Ticket ID:");
+        ticket.ticketId = Convert.ToUInt32(Console.ReadLine());
+        // ask user for ticket summary
+        Console.WriteLine("Ticket Summary: ");
+        // input 
+        ticket.summary = Console.ReadLine();
+        // new ticket automaticatlly assigned to open
+        ticket.status = "open";
+        // ask for ticket priority 
+        Console.WriteLine("Ticket Priority: ");
+        // input
+        ticket.priority = Console.ReadLine();
+        // ask for submitter name
+        Console.WriteLine("Your Name: ");
+        // input
+        ticket.submitter = Console.ReadLine();
+        // ask who ticket will be assigned to
+        Console.WriteLine("Assigned to: ");
+        //input
+        ticket.assigned = Console.ReadLine();
+
+        string input;
+        do
+        {
+        // ask user to enter others watching ticket
+        Console.WriteLine("Enter others watching ticket (or done to quit)");
+        // input watchers
+        input = Console.ReadLine();
+        // if user enters "done"
+            if (input != "done" && input.Length > 0)
+            {
+            ticket.watching.Add(ticket.assigned);
+            ticket.watching.Add(ticket.submitter);  
+            ticket.watching.Add(input);
+            }
+        } while (input != "done");
+        // specify if no other watchers were entered
+        if (ticket.watching.Count == 0)
+        {
+            ticket.watching.Add(ticket.assigned);
+            ticket.watching.Add(ticket.submitter);
+        }
+        ticketFile.Tickets.Add(ticket);
+        }
+        else if(choice == "2")
+        {
          // Display All Tickets
         foreach(Ticket t in ticketFile.Tickets)
         {
@@ -65,5 +81,6 @@ do
         }
         
      }
+     } while (choice == "1" || choice == "2");
 
  logger.Info("Program ended");
