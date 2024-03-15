@@ -16,6 +16,16 @@ logger.Info("Program started");
  TicketID, Summary, Status, Priority, Submitter, Assigned, Watching
 
  1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones */
+ Ticket ticket = new Ticket
+{
+  ticketId = 2,
+  summary = "system error ticket",
+  status = "open",
+  priority = "high",
+  submitter = "Samantha Jesmok",
+  assigned = "Drew Kjell",
+  watching = "Samantha Jesmok|Drew Kjell"
+};
  
  string ticketFile = "Ticket.csv";
 
@@ -28,6 +38,7 @@ logger.Info("Program started");
  {
      sw.WriteLine("TicketID, Summary, Status, Priority, Submitter, Assigned, Watching");
      sw.WriteLine("1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones");
+     sw.WriteLine($"{ticket.ticketId},{ticket.summary},{ticket.priority},{ticket.status},{ticket.submitter},{ticket.assigned},{ticket.watching}");
  }
 
  char menuOption;
@@ -49,7 +60,7 @@ logger.Info("Program started");
      }
      else if (menuOption == 'B')
      {
-         Console.Write("Add Ticket(TicketID, Summary, Status, Priority, Submitter, Assigned, Watching):\n");
+         Console.Write("Add Ticket:\n");
          string appendText = Console.ReadLine();
          File.AppendAllText(ticketFile, appendText);
      }
