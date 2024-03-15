@@ -6,5 +6,12 @@ public class Ticket
   public string  priority { get; set; }
   public string submitter { get; set; }
   public string  assigned { get; set; }
-  public string watching { get; set; }
+  public List<string> watching { get; set; }
+
+
+  public string Display()
+    {
+      return $"ID: {ticketId}\nSummary: {summary}\nPriority: {priority}\nSubmitted by: {submitter}\nAssigned to: {assigned}\nWatching: {string.Join(", ", watching)}";
+    }
+
 }
