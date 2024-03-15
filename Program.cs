@@ -7,16 +7,14 @@
  TicketID, Summary, Status, Priority, Submitter, Assigned, Watching
 
  1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones */
+ 
  string ticketFile = "Ticket.csv";
 
-
- // Check if file already exists. If yes, delete it.
  if (File.Exists(ticketFile))
  {
      File.Delete(ticketFile);
  }
 
- // Create a new file
  using (StreamWriter sw = File.CreateText(ticketFile))
  {
      sw.WriteLine("TicketID, Summary, Status, Priority, Submitter, Assigned, Watching");
