@@ -1,4 +1,13 @@
 ﻿ using Validater;
+ using NLog;
+
+// See https://aka.ms/new-console-template for more information
+string path = Directory.GetCurrentDirectory() + "\\nlog.config";
+
+// create instance of Logger
+var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
+logger.Info("Program started");
+
  /*Complete and submit first phase of project
  Build data file with initial system tickets and data in a CSV
  Write Console application to process and add records to the CSV file
@@ -45,3 +54,5 @@
          File.AppendAllText(ticketFile, appendText);
      }
  } while (menuOption != 'E');
+
+ logger.Info("Program ended");
