@@ -12,3 +12,6 @@ C:\NetProgramming\Tickets\obj\Debug\net6.0\refint\Tickets.dll
 C:\NetProgramming\Tickets\obj\Debug\net6.0\Tickets.pdb
 C:\NetProgramming\Tickets\obj\Debug\net6.0\Tickets.genruntimeconfig.cache
 C:\NetProgramming\Tickets\obj\Debug\net6.0\ref\Tickets.dll
+C:\NetProgramming\Tickets\bin\Debug\net6.0\NLog.dll
+C:\NetProgramming\Tickets\obj\Debug\net6.0\Tickets.csproj.AssemblyReference.cache
+C:\NetProgramming\Tickets\obj\Debug\net6.0\Tickets.csproj.CopyComplete
