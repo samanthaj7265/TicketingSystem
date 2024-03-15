@@ -1,0 +1,8 @@
+TicketID, Summary, Status, Priority, Submitter, Assigned, Watching
+1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones
+ID: 2
+Summary: system error ticket
+Priority: high
+Submitted by: Samantha Jesmok
+Assigned to: Drew Kjell
+Watching: Samantha Jesmok, Drew Kjell

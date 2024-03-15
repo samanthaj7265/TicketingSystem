@@ -40,29 +40,33 @@ TicketFile ticketFile = new TicketFile(ticketFilePath);
      sw.WriteLine($"{ticket.Display()}");
  }
 
- char menuOption;
+string choice = "";
+do
+{
+  // display choices to user
+  Console.WriteLine("1) New Ticket");
+  Console.WriteLine("2) Display All Tickets");
+  Console.WriteLine("Enter to quit");
+  // input selection
+  choice = Console.ReadLine();
+  logger.Info("User choice: {Choice}", choice);
+} while (choice == "1" || choice == "2");
 
- do
- {
-     menuOption = Inputs.GetChar("Do you want to (A - Read File, B - Add to File , E - End): ",
-         new char[] { 'A', 'B', 'E' });
-     if (menuOption == 'A')
+     {
+         Console.Write("Add Ticket:\n");
+         string appendText = Console.ReadLine();
+         File.AppendAllText(ticketFilePath, appendText); 
+     }
      {
          using (StreamReader sr = File.OpenText(ticketFilePath))
          {
              string s = "";
              while ((s = sr.ReadLine()) != null)
              {
-                 Console.WriteLine(s);
+                 Console.WriteLine(s); 
              }
+        
          }
      }
-     else if (menuOption == 'B')
-     {
-         Console.Write("Add Ticket:\n");
-         string appendText = Console.ReadLine();
-         File.AppendAllText(ticketFilePath, appendText);
-     }
- } while (menuOption != 'E');
 
  logger.Info("Program ended");
