@@ -58,15 +58,12 @@ do
          File.AppendAllText(ticketFilePath, appendText); 
      }
      {
-         using (StreamReader sr = File.OpenText(ticketFilePath))
-         {
-             string s = "";
-             while ((s = sr.ReadLine()) != null)
-             {
-                 Console.WriteLine(s); 
-             }
+         // Display All Tickets
+        foreach(Ticket t in ticketFile.Tickets)
+        {
+            Console.WriteLine(t.Display());
+        }
         
-         }
      }
 
  logger.Info("Program ended");
