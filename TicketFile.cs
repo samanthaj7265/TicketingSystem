@@ -5,15 +5,12 @@ public class TicketFile
   // public property
   public string filePath { get; set; }
   public List<Ticket> Tickets { get; set; }
-  
+  private static NLog.Logger logger = LogManager.LoadConfiguration(Directory.GetCurrentDirectory() +  
+  "\\nlog.config").GetCurrentClassLogger();
 
-  // constructor is a special method that is invoked
-  // when an instance of a class is created
   public TicketFile(string ticketFilePath)
   {
     filePath = ticketFilePath;
-       // create instance of Logger
-    NLog.Logger logger = LogManager.LoadConfiguration(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
 
     Tickets = new List<Ticket>();
 
@@ -44,6 +41,26 @@ public class TicketFile
       logger.Info("Tickets in file {Count}", Tickets.Count);
     }
     catch (Exception ex)
+    {
+      logger.Error(ex.Message);
+    }
+  }
+  
+  public void AddTicket(Ticket ticket)
+  {
+    try
+    {
+      //generate ticket id
+      ticket.ticketId = Tickets.Max(t => t.ticketId) + 1;
+      StreamWriter sw = new StreamWriter(filePath, true);
+      sw.WriteLine($"{ticket.ticketId},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned}{string.Join("|", ticket.watching)}");
+      sw.Close();
+
+      Tickets.Add(ticket);
+      // log transaction
+      logger.Info("Ticket id {Id} added", ticket.ticketId);
+    } 
+    catch(Exception ex)
     {
       logger.Error(ex.Message);
     }

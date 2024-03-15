@@ -1,4 +1,4 @@
-﻿ using Validater;
+﻿
  using NLog;
 using System.Collections.Immutable;
 using Microsoft.Win32.SafeHandles;
@@ -25,11 +25,8 @@ do
   choice = Console.ReadLine();
   logger.Info("User choice: {Choice}", choice);
      if (choice == "1")
-     {
+    {
         Ticket ticket = new Ticket();
-
-        Console.WriteLine("Ticket ID:");
-        ticket.ticketId = Convert.ToUInt32(Console.ReadLine());
         // ask user for ticket summary
         Console.WriteLine("Ticket Summary: ");
         // input 
@@ -70,8 +67,8 @@ do
             ticket.watching.Add(ticket.assigned);
             ticket.watching.Add(ticket.submitter);
         }
-        ticketFile.Tickets.Add(ticket);
-        }
+        ticketFile.AddTicket(ticket);
+    }
         else if(choice == "2")
         {
          // Display All Tickets
@@ -80,7 +77,7 @@ do
             Console.WriteLine(t.Display());
         }
         
-     }
+        }
      } while (choice == "1" || choice == "2");
 
  logger.Info("Program ended");
