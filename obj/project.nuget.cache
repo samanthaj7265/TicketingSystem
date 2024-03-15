@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qmlFZwWOxSSMxKWFJ0znlH6EJdPkrEzDQCbEVkt1gFlnQtS1n1ZiOWp1HwWjkjCsXcI9dToSKvw8DgB67zudSg==",
+  "dgSpecHash": "UR+y2NGT/HxC7XBVltLjVT7qEt9IG194ooHHqJkc37mOdwh31eUCCDSLbQnOwX4a/f+OxCAj/Rgs7fUR/DlUGw==",
   "success": true,
   "projectFilePath": "C:\\NetProgramming\\Tickets\\Tickets.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\sammi\\.nuget\\packages\\nlog\\5.1.1\\nlog.5.1.1.nupkg.sha512"
+  ],
   "logs": []
 }
