@@ -8,14 +8,13 @@ string path = Directory.GetCurrentDirectory() + "\\nlog.config";
 var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
 logger.Info("Program started");
 
+string ticketFilePath = Directory.GetCurrentDirectory() + "\\Tickets.csv";
+
  /*Complete and submit first phase of project
  Build data file with initial system tickets and data in a CSV
  Write Console application to process and add records to the CSV file
- Tickets.csv
+ Tickets.csv*/
 
- TicketID, Summary, Status, Priority, Submitter, Assigned, Watching
-
- 1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones */
  Ticket ticket = new Ticket
 {
   ticketId = 2,
@@ -26,15 +25,15 @@ logger.Info("Program started");
   assigned = "Drew Kjell",
   watching = new List<string> { "Samantha Jesmok", "Drew Kjell"}
 };
- 
- string ticketFile = "Ticket.csv";
 
- if (File.Exists(ticketFile))
+TicketFile ticketFile = new TicketFile(ticketFilePath);
+
+ if (File.Exists(ticketFilePath))
  {
-     File.Delete(ticketFile);
+     File.Delete(ticketFilePath);
  }
 
- using (StreamWriter sw = File.CreateText(ticketFile))
+ using (StreamWriter sw = File.CreateText(ticketFilePath))
  {
      sw.WriteLine("TicketID, Summary, Status, Priority, Submitter, Assigned, Watching");
      sw.WriteLine("1,This is a bug ticket,Open,High,Drew Kjell, Jane Doe,Drew Kjell| John Smith | Bill Jones");
@@ -49,7 +48,7 @@ logger.Info("Program started");
          new char[] { 'A', 'B', 'E' });
      if (menuOption == 'A')
      {
-         using (StreamReader sr = File.OpenText(ticketFile))
+         using (StreamReader sr = File.OpenText(ticketFilePath))
          {
              string s = "";
              while ((s = sr.ReadLine()) != null)
@@ -62,7 +61,7 @@ logger.Info("Program started");
      {
          Console.Write("Add Ticket:\n");
          string appendText = Console.ReadLine();
-         File.AppendAllText(ticketFile, appendText);
+         File.AppendAllText(ticketFilePath, appendText);
      }
  } while (menuOption != 'E');
 
