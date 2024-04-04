@@ -1,4 +1,4 @@
-public class Ticket
+public abstract class Ticket
 {
   public UInt64 ticketId { get; set; }
   public string summary { get; set; }
@@ -12,12 +12,9 @@ public class Ticket
   {
     watching = new List<string>();
   }
-
-
-
-  public string Display()
+  public virtual string Display()
     {
       return $"ID: {ticketId}\nSummary: {summary}\nPriority: {priority}\nSubmitted by: {submitter}\nAssigned to: {assigned}\nWatching: {string.Join(", ", watching)}";
     }
-
+    
 }
