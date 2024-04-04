@@ -23,8 +23,9 @@ public class TicketFile
       while (!sr.EndOfStream)
       {
         // create instance of Ticket class
-          Ticket ticket = new Ticket();
+          Ticket ticket = new BugDefect();
           string line = sr.ReadLine();
+
 
           string[] TicketDetails = line.Split(',');
           ticket.ticketId = UInt64.Parse(TicketDetails[0]);

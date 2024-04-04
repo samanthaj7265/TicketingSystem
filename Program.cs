@@ -14,6 +14,10 @@ string ticketFilePath = Directory.GetCurrentDirectory() + "\\Tickets.csv";
 
 TicketFile ticketFile = new TicketFile(ticketFilePath);
 
+string enhancementFilePath = Directory.GetCurrentDirectory() + "\\Enhancements.csv";
+
+EnhancementFile enhancementTicketFile = new EnhancementFile(enhancementFilePath);
+
 string choice = "";
 do
 {
@@ -25,8 +29,16 @@ do
   choice = Console.ReadLine();
   logger.Info("User choice: {Choice}", choice);
      if (choice == "1")
-    {
-        Ticket ticket = new Ticket();
+     {
+         Console.WriteLine("1) Bug/Defect Ticket");
+         Console.WriteLine("2) Enhancemnet Ticket");
+         Console.WriteLine("3) Task Ticket");
+
+         choice = Console.ReadLine();
+         logger.Info("User choice: {Choice}", choice);
+         if (choice == "1")
+         {
+        BugDefect ticket = new BugDefect();
         // ask user for ticket summary
         Console.WriteLine("Ticket Summary: ");
         // input 
@@ -45,6 +57,10 @@ do
         Console.WriteLine("Assigned to: ");
         //input
         ticket.assigned = Console.ReadLine();
+
+        Console.WriteLine("Severity of Ticket: "); 
+
+        ticket.severity = Console.ReadLine();
 
         string input;
         do
@@ -68,6 +84,123 @@ do
             ticket.watching.Add(ticket.submitter);
         }
         ticketFile.AddTicket(ticket);
+          }
+        if (choice == "2")
+         {
+        Enhancement ticket = new Enhancement();
+        // ask user for ticket summary
+        Console.WriteLine("Ticket Summary: ");
+        // input 
+        ticket.summary = Console.ReadLine();
+        // new ticket automaticatlly assigned to open
+        ticket.status = "open";
+        // ask for ticket priority 
+        Console.WriteLine("Ticket Priority: ");
+        // input
+        ticket.priority = Console.ReadLine();
+        // ask for submitter name
+        Console.WriteLine("Your Name: ");
+        // input
+        ticket.submitter = Console.ReadLine();
+        // ask who ticket will be assigned to
+        Console.WriteLine("Assigned to: ");
+        //input
+        ticket.assigned = Console.ReadLine();
+
+        Console.WriteLine("Software: ");
+        //input
+        ticket.software = Console.ReadLine();
+
+        Console.WriteLine("Cost: ");
+        //input
+        ticket.cost = Convert.ToDecimal(Console.ReadLine());
+
+        Console.WriteLine("Reason: ");
+        //input
+        ticket.reason = Console.ReadLine();
+
+        Console.WriteLine("Estimate: ");
+        //input
+        ticket.estimate = Convert.ToDecimal(Console.ReadLine());
+
+        string input;
+        do
+        {
+        // ask user to enter others watching ticket
+        Console.WriteLine("Enter others watching ticket (or done to quit)");
+        // input watchers
+        input = Console.ReadLine();
+        // if user enters "done"
+            if (input != "done" && input.Length > 0)
+            {
+            ticket.watching.Add(ticket.assigned);
+            ticket.watching.Add(ticket.submitter);  
+            ticket.watching.Add(input);
+            }
+        } while (input != "done");
+        // specify if no other watchers were entered
+        if (ticket.watching.Count == 0)
+        {
+            ticket.watching.Add(ticket.assigned);
+            ticket.watching.Add(ticket.submitter);
+        }
+        enhancementFilePath.AddTicket(ticket);
+          }
+        if (choice == "3")
+         {
+        Task ticket = new Task();
+        // ask user for ticket summary
+        Console.WriteLine("Ticket Summary: ");
+        // input 
+        ticket.summary = Console.ReadLine();
+        // new ticket automaticatlly assigned to open
+        ticket.status = "open";
+        // ask for ticket priority 
+        Console.WriteLine("Ticket Priority: ");
+        // input
+        ticket.priority = Console.ReadLine();
+        // ask for submitter name
+        Console.WriteLine("Your Name: ");
+        // input
+        ticket.submitter = Console.ReadLine();
+        // ask who ticket will be assigned to
+        Console.WriteLine("Assigned to: ");
+        //input
+        ticket.assigned = Console.ReadLine();
+
+        Console.WriteLine("Software: ");
+        //input
+        ticket.projectName = Console.ReadLine();
+
+        Console.WriteLine("Cost: ");
+        //input
+        ticket.dueDate = Convert.ToDateTime(Console.ReadLine());
+
+        string input;
+        do
+        {
+        // ask user to enter others watching ticket
+        Console.WriteLine("Enter others watching ticket (or done to quit)");
+        // input watchers
+        input = Console.ReadLine();
+        // if user enters "done"
+            if (input != "done" && input.Length > 0)
+            {
+            ticket.watching.Add(ticket.assigned);
+            ticket.watching.Add(ticket.submitter);  
+            ticket.watching.Add(input);
+            }
+        } while (input != "done");
+        // specify if no other watchers were entered
+        if (ticket.watching.Count == 0)
+        {
+            ticket.watching.Add(ticket.assigned);
+            ticket.watching.Add(ticket.submitter);
+        }
+        enhancementTicketFile.AddTicket(ticket);
+          }
+
+
     }
         else if(choice == "2")
         {
