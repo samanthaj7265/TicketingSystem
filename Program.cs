@@ -18,6 +18,10 @@ string enhancementFilePath = Directory.GetCurrentDirectory() + "\\Enhancements.c
 
 EnhancementFile enhancementTicketFile = new EnhancementFile(enhancementFilePath);
 
+string taskFilePath = Directory.GetCurrentDirectory() + "\\Enhancements.csv";
+
+TaskFile taskTicketFile = new TaskFile(taskFilePath);
+
 string choice = "";
 do
 {
@@ -144,7 +148,7 @@ do
             ticket.watching.Add(ticket.assigned);
             ticket.watching.Add(ticket.submitter);
         }
-        enhancementFilePath.AddTicket(ticket);
+        enhancementTicketFile.AddTicket(ticket);
           }
         if (choice == "3")
          {
@@ -168,11 +172,11 @@ do
         //input
         ticket.assigned = Console.ReadLine();
 
-        Console.WriteLine("Software: ");
+        Console.WriteLine("Project Name: ");
         //input
         ticket.projectName = Console.ReadLine();
 
-        Console.WriteLine("Cost: ");
+        Console.WriteLine("Due Date: ");
         //input
         ticket.dueDate = Convert.ToDateTime(Console.ReadLine());
 
@@ -197,7 +201,7 @@ do
             ticket.watching.Add(ticket.assigned);
             ticket.watching.Add(ticket.submitter);
         }
-        enhancementTicketFile.AddTicket(ticket);
+        taskTicketFile.AddTicket(ticket);
           }
 
 
