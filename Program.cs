@@ -28,6 +28,7 @@ do
   // display choices to user
   Console.WriteLine("1) New Ticket");
   Console.WriteLine("2) Display All Tickets");
+  Console.WriteLine("3) Search For Ticket");
   Console.WriteLine("Enter to quit");
   // input selection
   choice = Console.ReadLine();
@@ -206,7 +207,7 @@ do
 
 
     }
-        else if(choice == "2")
+        if(choice == "2")
         {
          // Display All Tickets
         foreach(Ticket t in ticketFile.Tickets)
@@ -214,6 +215,55 @@ do
             Console.WriteLine(t.Display());
         }
         
+        
+        }
+        else if(choice == "3")
+        {     
+         Console.WriteLine("Search Tickets By: ");     
+         Console.WriteLine("1) Status");
+         Console.WriteLine("2) Priority");
+         Console.WriteLine("3) Submitter");
+         choice = Console.ReadLine();
+         logger.Info("User choice: {Choice}", choice);
+         if (choice == "1")
+         {
+          Console.WriteLine("Search Keyword:");
+          string search = Console.ReadLine();
+          var tickets = ticketFile.Tickets.Where(t => t.status.Contains(search)).Select(t => t);
+          
+          Console.WriteLine($"There are {tickets.Count()} tickets:");
+
+          foreach(Ticket t in tickets)
+          {
+             Console.WriteLine($"  {tickets}");
+          }
+         }
+                 if (choice == "2")
+         {
+          Console.WriteLine("Search Keyword:");
+          string search = Console.ReadLine();
+          var tickets = ticketFile.Tickets.Where(t => t.priority.Contains(search)).Select(t => t);
+          
+          Console.WriteLine($"There are {tickets.Count()} tickets:");
+
+          foreach(Ticket t in tickets)
+          {
+             Console.WriteLine($"  {tickets}");
+          }
+         }
+                 if (choice == "3")
+         {
+          Console.WriteLine("Search Keyword:");
+          string search = Console.ReadLine();
+          var tickets = ticketFile.Tickets.Where(t => t.submitter.Contains(search)).Select(t => t);
+          
+          Console.WriteLine($"There are {tickets.Count()} tickets:");
+
+          foreach(Ticket t in tickets)
+          {
+             Console.WriteLine($"  {tickets}");
+          }
+         }
         }
      } while (choice == "1" || choice == "2");
 
